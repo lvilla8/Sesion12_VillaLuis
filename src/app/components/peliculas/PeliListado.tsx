@@ -3,6 +3,7 @@ import { Pelicula } from "../../models/Pelicula";
 import { ARREGLO_PELICULA } from "../../mocks/Pelicula-mocks";
 import { ARREGLO_PELICULA_GENERO } from "../../utility/dominios/DomGenero";
 import { PeliVerImagen } from "./PeliVerImagen";
+import { NavLink } from "react-router-dom";
 
 export const PeliListado = () => {
   const [modalShow, setModalShow] = useState<boolean>(false);
@@ -20,18 +21,21 @@ export const PeliListado = () => {
 
   return (
     <>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <NavLink to="/">Inicio</NavLink>
+          </li>
+          <li className="breadcrumb-item">
+            <NavLink to="#">Peliculas</NavLink>
+          </li>
+          <li className="breadcrumb-item" aria-current="page">
+            Listar
+          </li>
+        </ol>
+      </nav>
       <div className="d-flex justify-content-center">
         <div className="col-md-11 mt-4">
-          {/* <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <a href="#">Home</a>
-              </li>
-              <li className="breadcrumb-item active" aria-current="page">
-                Library
-              </li>
-            </ol>
-          </nav> */}
           <table className="table table-striped table-hover">
             <thead>
               <tr className="table-danger">
@@ -66,9 +70,13 @@ export const PeliListado = () => {
               ))}
             </tbody>
           </table>
-          <PeliVerImagen show={modalShow} onHide={()=>{setModalShow(false); }} obj={objPeli}/>
-
-
+          <PeliVerImagen
+            show={modalShow}
+            onHide={() => {
+              setModalShow(false);
+            }}
+            obj={objPeli}
+          />
         </div>
       </div>
     </>
