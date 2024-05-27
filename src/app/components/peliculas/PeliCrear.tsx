@@ -20,14 +20,9 @@ export const PeliCrear = () => {
   const [arregloPelicula] = useState<Pelicula[]>(ARREGLO_PELICULA);
   const [arregloGeneros] = useState<PeliculaGenero[]>(ARREGLO_PELICULA_GENERO);
 
-  let {
-    nombrePelicula,
-    protagonistaPelicula,
-    codGeneroPelicula,
-    imagenPelicula,
-    dobleEnlace,
-    objeto,
-  } = useFormulario<Pelicula>(new Pelicula(0, "", "", "", "", ""));
+  let { nombrePelicula, protagonistaPelicula, codGeneroPelicula, imagenPelicula, dobleEnlace, objeto } = useFormulario<Pelicula>(
+    new Pelicula(0, "", "", "", "", "")
+  );
 
   const enviarFrom = (objForm: formHtml) => {
     objForm.preventDefault();
@@ -38,15 +33,16 @@ export const PeliCrear = () => {
       objForm.stopPropagation();
       setEnProceso(true);
     } else {
-      const nuevocod = arregloPelicula.length + 1;
+      const ultimaPeli = arregloPelicula[arregloPelicula.length - 1];
+      const nuevocod = ultimaPeli.codPelicula + 1;
       objeto.codPelicula = nuevocod;
-      objeto.imagenPeliculaBase64 = imgBase64
+      objeto.imagenPeliculaBase64 = imgBase64;
       objeto.imagenPelicula = imagenPelicula.substring(imagenPelicula.lastIndexOf("\\") + 1);
       arregloPelicula.push(objeto);
       setEnProceso(false);
-      irsePara("/plistar")
+      irsePara("/plistar");
     }
-  }
+  };
 
   const cargarImagen = async (e: any) => {
     const archivos = e.target.files;
@@ -55,7 +51,7 @@ export const PeliCrear = () => {
     dobleEnlace(e);
     const base64 = await ConvertirBase64(imagen);
     setImgBase64(base64);
-};
+  };
 
   return (
     <div className="d-flex justify-content-center">
@@ -81,7 +77,14 @@ export const PeliCrear = () => {
                   <Form.Label>
                     <span className="rojito">*</span> Protagonista
                   </Form.Label>
-                  <Form.Control size="sm" required type="text" name="protagonistaPelicula" value={protagonistaPelicula} onChange={dobleEnlace} />
+                  <Form.Control
+                    size="sm"
+                    required
+                    type="text"
+                    name="protagonistaPelicula"
+                    value={protagonistaPelicula}
+                    onChange={dobleEnlace}
+                  />
                 </Form.Group>
               </div>
 
@@ -125,6 +128,6 @@ export const PeliCrear = () => {
           </div>
         </Form>
       </div>
-    </div >
+    </div>
   );
 };

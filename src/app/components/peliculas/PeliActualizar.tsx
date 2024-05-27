@@ -1,10 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Form from "react-bootstrap/Form";
 import noFoto from "../../../assets/img/noDisponible.png";
+import { NavLink } from "react-router-dom";
 
 export const PeliActualizar = (props: any) => {
   console.log(props);
   return (
+    <>
+    <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <NavLink to="/">Inicio</NavLink>
+          </li>
+          <li className="breadcrumb-item">
+            <NavLink to="#">Peliculas</NavLink>
+          </li>
+          <li className="breadcrumb-item">
+            <NavLink to="/padmin">Admin</NavLink>
+          </li>
+          <li className="breadcrumb-item" aria-current="page">
+            Actualizar
+          </li>
+        </ol>
+      </nav>
     <div className="d-flex justify-content-center">
       <div className="col-md-5 mt-5 pb-4">
         <Form noValidate>
@@ -75,5 +93,6 @@ export const PeliActualizar = (props: any) => {
         </Form>
       </div>
     </div>
+    </>
   );
 };
